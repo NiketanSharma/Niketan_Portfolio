@@ -1,0 +1,43 @@
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #DFDFDA;
+  --black: #0a0a0a;
+  --white: #ffffff;
+  --text: #0a0a0a;
+  --radius-card: 40px;
+  --font: 'Plus Jakarta Sans', sans-serif;
+}
+
+html {
+  font-family: var(--font);
+  background-color: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* Lenis */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+body {
+  background-color: var(--bg);
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img { display: block; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font);
+  font-weight: 800;
+}

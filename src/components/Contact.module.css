@@ -1,0 +1,128 @@
+.contact {
+  background: var(--black);
+  color: #fff;
+  padding: 5rem 2.5rem 3rem;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  margin-bottom: 5rem;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .top { grid-template-columns: 1fr; }
+}
+
+.bigText {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.field label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.4;
+}
+
+.field input,
+.field textarea {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  color: #fff;
+  font-family: var(--font);
+  font-size: 0.95rem;
+  padding: 0.85rem 1rem;
+  outline: none;
+  transition: border-color 0.3s;
+  resize: none;
+  width: 100%;
+}
+
+.field input:focus,
+.field textarea:focus {
+  border-color: rgba(255,255,255,0.4);
+}
+
+.submitBtn {
+  align-self: flex-start;
+  background: #fff;
+  color: #000;
+  font-family: var(--font);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 0.85rem 2rem;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.submitBtn:hover {
+  background: #ddd;
+  transform: translateY(-2px);
+}
+
+/* Bottom footer row */
+.bottom {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.footerCol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.colLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  opacity: 0.3;
+  margin-bottom: 0.3rem;
+}
+
+.footLink {
+  font-size: 0.95rem;
+  font-weight: 500;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.footLink:hover { opacity: 1; }
+
+.footerRight {
+  margin-left: auto;
+  align-self: flex-end;
+}
+
+.copy {
+  font-size: 0.75rem;
+  opacity: 0.3;
+}

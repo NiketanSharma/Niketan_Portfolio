@@ -1,0 +1,120 @@
+.works {
+  background: var(--black);
+  color: #fff;
+  padding: 5rem 2.5rem;
+}
+
+.worksHeader {
+  margin-bottom: 3rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 1.5rem;
+}
+
+.label {
+  font-size: clamp(1.4rem, 3vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.projectCard {
+  display: block;
+  padding: 2.5rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.projectCard:hover {
+  background: rgba(255,255,255,0.02);
+}
+
+.projectMeta {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.projectNum {
+  font-size: 0.75rem;
+  font-weight: 700;
+  opacity: 0.3;
+  letter-spacing: 0.06em;
+  padding-top: 0.2rem;
+  min-width: 28px;
+}
+
+.projectCat {
+  font-size: 0.85rem;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.projectTag {
+  font-size: 0.75rem;
+  opacity: 0.4;
+  font-weight: 500;
+  margin-top: 0.2rem;
+  letter-spacing: 0.04em;
+}
+
+.imageWrap {
+  width: 100%;
+  height: clamp(280px, 50vh, 520px);
+  overflow: hidden;
+  border-radius: 12px;
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.projectImg {
+  width: 100%;
+  height: 115%; /* extra height for parallax */
+  object-fit: cover;
+  transition: transform 0.6s ease;
+  will-change: transform;
+}
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.4s ease;
+}
+
+.projectCard:hover .imageOverlay {
+  background: rgba(0,0,0,0.35);
+}
+
+.viewBtn {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fff;
+  border: 1.5px solid #fff;
+  border-radius: 50px;
+  padding: 0.7rem 1.6rem;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  letter-spacing: 0.04em;
+}
+
+.projectCard:hover .viewBtn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.projectTitle {
+  font-size: clamp(1.8rem, 4vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}

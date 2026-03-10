@@ -1,0 +1,91 @@
+.wrapper {
+  position: relative;
+  z-index: 10;
+  /* This section lives directly below the hero — the card will overlap */
+  margin-top: -40vh;
+  padding-bottom: 0;
+}
+
+.card {
+  background: var(--black);
+  color: #fff;
+  border-radius: 40px 40px 0 0;
+  padding: 5rem 2.5rem 6rem;
+  min-height: 100vh;
+  will-change: transform;
+}
+
+.header {
+  margin-bottom: 4rem;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  padding-bottom: 2rem;
+}
+
+.sectionTitle {
+  font-size: clamp(1.4rem, 3vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.serviceRow {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 1.5rem;
+  padding: 2.5rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  transition: background 0.3s;
+}
+
+.serviceRow:hover {
+  background: rgba(255,255,255,0.03);
+}
+
+.num {
+  font-size: 0.8rem;
+  font-weight: 700;
+  opacity: 0.3;
+  letter-spacing: 0.06em;
+  padding-top: 0.3rem;
+}
+
+.serviceContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.serviceTitle {
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.serviceDesc {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  opacity: 0.6;
+  max-width: 680px;
+  font-weight: 400;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50px;
+  padding: 0.3rem 0.8rem;
+  opacity: 0.7;
+}

@@ -1,0 +1,40 @@
+/* Black backdrop */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #0a0a0a;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/*
+ * Beige panel — starts below the screen, slides to cover everything.
+ * translateY is GPU-composited: zero layout, zero paint = butter smooth.
+ * The bottom edge has a subtle curve via border-radius on the top line.
+ */
+.panel {
+  position: absolute;
+  /* Slightly wider + taller than viewport to avoid gaps */
+  left: -2%;
+  width: 104%;
+  height: 110%;
+  bottom: 0;
+  background: var(--bg, #DFDFDA);
+  /* Start completely below viewport */
+  transform: translateY(102%);
+  will-change: transform;
+  /* Curve only on the leading (top) edge */
+  border-radius: 60% 60% 0 0 / 8% 8% 0 0;
+  transition: none;
+}
+
+/* Slide up — fills the whole screen */
+.panel.up {
+  transform: translateY(0%);
+  /* The border-radius flattens out as it fills (from curved leading to flat) */
+  border-radius: 0;
+  transition:
+    transform 1.5s cubic-bezier(0.76, 0, 0.24, 1),
+    border-radius 1.2s cubic-bezier(0.76, 0, 0.24, 1) 0.2s;
+}
