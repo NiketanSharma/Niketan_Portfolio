@@ -26,8 +26,8 @@ const Hero = ({ ready }) => {
 
   useEffect(() => {
     if (ready) {
-      // Start loading Spline *after* the preloader is completely done and unmounted
-      const timer = setTimeout(() => setShowSpline(true), 100);
+      // Start loading Spline sooner so the robot appears faster
+      const timer = setTimeout(() => setShowSpline(true), 800);
       return () => clearTimeout(timer);
     }
   }, [ready]);
@@ -61,8 +61,8 @@ const Hero = ({ ready }) => {
     <motion.div
       className={styles.imageWrap}
       initial={{ opacity: 0 }}
-      animate={ready ? { opacity: 1 } : {}}
-      transition={{ duration: 1.2, delay: 0.5 }}
+      animate={showSpline ? { opacity: 1 } : { opacity: 0 }}
+      transition={{ duration: 0.8 }}
     >
       {/* Wrapper to crop out the bottom Spline watermark and capture full screen mouse movements */}
       <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden' }}>
