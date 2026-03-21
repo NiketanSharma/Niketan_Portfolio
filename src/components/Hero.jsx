@@ -27,8 +27,9 @@ const Hero = ({ ready }) => {
 
   useEffect(() => {
     if (ready) {
-      // Start loading Spline sooner so the robot appears faster
-      const timer = setTimeout(() => setShowSpline(true), 800);
+      // Start fetching the Spline scene almost immediately after the preloader finishes.
+      // Since network fetch takes time, the heavy WebGL parsing will naturally occur near the end of the text stagger.
+      const timer = setTimeout(() => setShowSpline(true), 100);
       return () => clearTimeout(timer);
     }
   }, [ready]);
