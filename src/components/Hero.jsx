@@ -23,6 +23,7 @@ const ContactBtn = () => (
 
 const Hero = ({ ready }) => {
   const [showSpline, setShowSpline] = useState(false);
+  const [iframeLoaded, setIframeLoaded] = useState(false);
 
   useEffect(() => {
     if (ready) {
@@ -60,9 +61,9 @@ const Hero = ({ ready }) => {
     {/* ── 3D Spline Robot — Massive Background Element ── */}
     <motion.div
       className={styles.imageWrap}
-      initial={{ opacity: 0 }}
-      animate={showSpline ? { opacity: 1 } : { opacity: 0 }}
-      transition={{ duration: 0.8 }}
+      initial={{ opacity: 0, y: 40 }}
+      animate={iframeLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+      transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
     >
       {/* Wrapper to crop out the bottom Spline watermark and capture full screen mouse movements */}
       <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden' }}>
@@ -71,6 +72,7 @@ const Hero = ({ ready }) => {
             src="https://my.spline.design/nexbotrobotcharacterconcept-p6Ci2u51nhdo2SKld1GsSodb/"
             frameBorder="0"
             title="Spline 3D Robot"
+            onLoad={() => setIframeLoaded(true)}
             style={{
               pointerEvents: 'auto',
               position: 'absolute',
