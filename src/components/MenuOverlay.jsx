@@ -5,7 +5,7 @@ import styles from './MenuOverlay.module.css';
 const navItems = [
   { label: 'HOME', id: 'Home' },
   { label: 'SERVICES', id: 'Services' },
-  { label: 'PROJECTS', id: 'Works' },
+  { label: 'PROJECTS', id: 'Projects' },
   { label: 'ABOUT', id: 'About' },
   { label: 'CONTACT', id: 'Contact' },
 ];

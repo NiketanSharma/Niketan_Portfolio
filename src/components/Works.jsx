@@ -52,7 +52,7 @@ const ProjectCard = ({ project }) => {
 };
 
 const Works = () => (
-  <section className={styles.works} id="Works">
+  <section className={styles.works} id="Projects">
     <div className={styles.worksHeader}>
       <span className={styles.label}>PROJECTS /</span>
     </div>
