@@ -25,10 +25,12 @@ const Hero = ({ ready }) => {
   const [showSpline, setShowSpline] = useState(false);
 
   useEffect(() => {
-    // Start loading Spline 500ms after component mounts to avoid blocking initial render/preloader
-    const timer = setTimeout(() => setShowSpline(true), 500);
-    return () => clearTimeout(timer);
-  }, []);
+    if (ready) {
+      // Start loading Spline *after* the preloader is completely done and unmounted
+      const timer = setTimeout(() => setShowSpline(true), 100);
+      return () => clearTimeout(timer);
+    }
+  }, [ready]);
 
   return (
   <section className={styles.hero} id="Home">
