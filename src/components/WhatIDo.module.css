@@ -1,91 +1,194 @@
+/* ── Wrapper ─────────────────────────────────── */
 .wrapper {
   position: relative;
-  z-index: 10;
-  /* This section lives directly below the hero — the card will overlap */
-  margin-top: -40vh;
-  padding-bottom: 0;
+  pointer-events: none;
 }
 
+/* ── Main card ──────────────────────────────── */
 .card {
+  position: relative;
   background: var(--black);
   color: #fff;
   border-radius: 40px 40px 0 0;
-  padding: 5rem 2.5rem 6rem;
-  min-height: 100vh;
-  will-change: transform;
+  padding: 5rem 2.5rem 0;
+  pointer-events: auto;
 }
 
+/* ── Header ─────────────────────────────────── */
 .header {
-  margin-bottom: 4rem;
-  border-bottom: 1px solid rgba(255,255,255,0.12);
-  padding-bottom: 2rem;
+  margin-bottom: 3rem;
 }
 
 .sectionTitle {
-  font-size: clamp(1.4rem, 3vw, 2.4rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.85);
 }
 
-.list {
+/* ── Intro row ──────────────────────────────── */
+.introRow {
   display: flex;
-  flex-direction: column;
-  gap: 0;
+  gap: 2rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  align-items: flex-start;
 }
 
-.serviceRow {
-  display: grid;
-  grid-template-columns: 60px 1fr;
-  gap: 1.5rem;
-  padding: 2.5rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  transition: background 0.3s;
+.introLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  opacity: 0.5;
+  white-space: nowrap;
+  padding-top: 0.2rem;
 }
 
-.serviceRow:hover {
-  background: rgba(255,255,255,0.03);
-}
-
-.num {
-  font-size: 0.8rem;
-  font-weight: 700;
-  opacity: 0.3;
-  letter-spacing: 0.06em;
-  padding-top: 0.3rem;
-}
-
-.serviceContent {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.serviceTitle {
-  font-size: clamp(1.4rem, 2.5vw, 2rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-.serviceDesc {
-  font-size: 0.95rem;
+.introText {
+  font-size: 1.5rem;
   line-height: 1.7;
-  opacity: 0.6;
-  max-width: 680px;
+  opacity: 0.65;
+  max-width: 520px;
   font-weight: 400;
 }
 
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+/* ── Sticky scroll container ─────────────────── */
+.stickyContainer {
+  position: relative;
+  margin-top: 1rem;
 }
 
-.tag {
-  font-size: 0.75rem;
+/* ── Service card (pinned by GSAP ScrollTrigger) ── */
+.stickyCard {
+  background: var(--black);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding-bottom: 4rem;
+}
+
+.cardContent {
+  display: flex;
+  gap: 4rem;
+  padding-top: 2rem;
+}
+
+.leftCol {
+  flex: 0 0 auto;
+  min-width: 120px;
+}
+
+.rightCol {
+  flex: 1;
+}
+
+.num {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: #d5cece;
+  opacity: 0.9;
+}
+
+.serviceTitle {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: #d5cece;
+  margin-bottom: 2rem;
+  /* Ensure title fits in pinned area roughly */
+}
+
+/* ── Card body (description + skills) ────────── */
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: -0.5rem;
+  max-width: 800px;
+}
+
+
+.serviceDesc {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  opacity: 0.6;
+  max-width: 520px;
+  font-weight: 400;
+}
+
+/* ── Skills list ──────────────────────────────── */
+.skillsList {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+.skillRow {
+  display: flex;
+  align-items: baseline;
+  gap: 2rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.skillRow:first-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.skillNum {
+  font-size: 1rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 50px;
-  padding: 0.3rem 0.8rem;
-  opacity: 0.7;
+  opacity: 0.4;
+  letter-spacing: 0.05em;
+  min-width: 30px;
+}
+
+.skillText {
+  font-size: clamp(1.2rem, 2.5vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #d5cece;
+}
+
+/* ── Responsive ──────────────────────────────── */
+@media (max-width: 992px) {
+  .cardContent {
+    gap: 2rem;
+  }
+
+  .leftCol {
+    min-width: 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cardContent {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .leftCol {
+    min-width: unset;
+  }
+
+  .introRow {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .sectionTitle {
+    font-size: clamp(2.5rem, 10vw, 4rem);
+  }
+
+  .num,
+  .serviceTitle {
+    font-size: 3rem;
+  }
+
+  .skillText {
+    font-size: 1.5rem;
+  }
 }

@@ -2,6 +2,7 @@
   background: var(--black);
   color: #fff;
   padding: 5rem 2.5rem 3rem;
+  pointer-events: auto;
 }
 
 .top {
@@ -10,12 +11,14 @@
   gap: 4rem;
   margin-bottom: 5rem;
   padding-bottom: 4rem;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   align-items: start;
 }
 
 @media (max-width: 768px) {
-  .top { grid-template-columns: 1fr; }
+  .top {
+    grid-template-columns: 1fr;
+  }
 }
 
 .bigText {
@@ -47,8 +50,8 @@
 
 .field input,
 .field textarea {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 8px;
   color: #fff;
   font-family: var(--font);
@@ -62,27 +65,37 @@
 
 .field input:focus,
 .field textarea:focus {
-  border-color: rgba(255,255,255,0.4);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
-.submitBtn {
+.contactBtn {
+  position: relative;
   align-self: flex-start;
-  background: #fff;
-  color: #000;
+  background: black;
+  color: white;
   font-family: var(--font);
   font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.06em;
-  padding: 0.85rem 2rem;
-  border-radius: 50px;
+  padding: 14px 28px;
   border: none;
+  overflow: hidden;
   cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
+  isolation: isolate;
 }
 
-.submitBtn:hover {
-  background: #ddd;
-  transform: translateY(-2px);
+.contactBtn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(100%);
+  transition: transform 0.4s ease;
+}
+
+.contactBtn:hover::before {
+  transform: translateY(0);
 }
 
 /* Bottom footer row */
@@ -115,14 +128,56 @@
   transition: opacity 0.2s;
 }
 
-.footLink:hover { opacity: 1; }
+.footLink:hover {
+  opacity: 1;
+}
 
 .footerRight {
   margin-left: auto;
   align-self: flex-end;
 }
 
-.copy {
-  font-size: 0.75rem;
-  opacity: 0.3;
+.scrollTopBtn {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #ccd0c4;
+  /* Matching the beige/gray in reference */
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.scrollTopBtn:hover {
+  transform: scale(1.05);
+  background: #daddd1;
+}
+
+.arrowWrapper {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.arrowIcon {
+  font-size: 2rem;
+  color: #4a4742;
+  /* Dark brown/gray matching reference */
+  font-weight: 300;
+  height: 72px;
+  /* same as button height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scrollTopBtn:hover .arrowWrapper {
+  transform: translateY(-72px);
 }

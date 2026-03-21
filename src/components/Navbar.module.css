@@ -1,6 +1,6 @@
 .navbar {
   position: fixed;
-  top: 0;
+  top: 11;
   left: 0;
   right: 0;
   z-index: 9000;
@@ -8,13 +8,17 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.4rem 2rem;
+  /* Allow mouse to pass through empty space in header */
+  pointer-events: none;
 }
 
 .brand {
-  font-size: 0.78rem;
+  font-size: 1.3rem;
   font-weight: 400;
   opacity: 0.5;
   white-space: nowrap;
+  /* Re-enable interactions for the logo */
+  pointer-events: auto;
 }
 
 .nav {
@@ -26,17 +30,26 @@
 .navLink {
   display: block;
   text-decoration: none;
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: 600;
   letter-spacing: 0.07em;
   text-transform: uppercase;
   color: #0a0a0a;
   opacity: 0.85;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  /* Re-enable interactions for nav links */
+  pointer-events: auto;
+  /* Button reset */
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
 }
 
 .navLink:hover {
   opacity: 0.4;
+  transform: scale(1.05);
 }
 
 /* Cube wrappers kept in markup but display flat */

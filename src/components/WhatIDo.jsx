@@ -1,69 +1,137 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React, { useRef, useEffect } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './WhatIDo.module.css';
+
+gsap.registerPlugin(ScrollTrigger);
+
+const TITLE_ROW_HEIGHT = 130; // px — height of the pinned header area
 
 const services = [
   {
     num: '01',
     title: 'Full-Stack Development',
     desc: 'From frontend interactions to backend APIs, I build complete web solutions. I work with modern stacks to deliver apps that are scalable, maintainable, and ready for real-world users.',
-    tags: ['React', 'Node.js', 'Express.js', 'Databases']
+    skills: [
+      { id: '01', text: 'React, Node.js, Express.js' },
+      { id: '02', text: 'REST APIs, Firebase, Docker' },
+      { id: '03', text: 'Git, GitHub, Postman' },
+    ],
   },
   {
     num: '02',
     title: 'UI/UX & Frontend',
     desc: 'Good design feels effortless. I design and develop responsive, intuitive interfaces that work smoothly across devices, with a strong focus on clarity, accessibility, and performance.',
-    tags: ['Next.js', 'TailwindCSS', 'GSAP', 'Framer Motion']
+    skills: [
+      { id: '01', text: 'NextJs, TailwindCSS, GSAP' },
+      { id: '02', text: 'Figma → Pixel-perfect code' },
+      { id: '03', text: 'HTML, CSS, JavaScript' },
+    ],
   },
   {
     num: '03',
     title: 'Optimization',
-    desc: 'I focus on building systems that stay reliable as things scale. From handling data efficiently to designing clean architecture, I apply core CS principles to keep applications fast and future-ready.',
-    tags: ['DSA', 'DBMS', 'OOP', 'System Design']
+    desc: 'I build scalable, reliable systems with efficient data handling and clean, high-performance architecture.',
+    skills: [
+      { id: '01', text: 'Data Structures & Algorithms' },
+      { id: '02', text: 'DBMS, OOP, OS Fundamentals' },
+      { id: '03', text: 'Scalable systems & data pipelines' },
+    ],
   },
 ];
 
+/* ── Individual service card ─────────────────────────────────── */
+const ServiceCard = React.forwardRef(({ service, index }, ref) => (
+  <div
+    ref={ref}
+    className={styles.stickyCard}
+  >
+    <div className={styles.cardContent}>
+      <div className={styles.leftCol}>
+        <span className={styles.num}>({service.num})</span>
+      </div>
+
+      <div className={styles.rightCol}>
+        {/* The title stays in the "pinned" area (top staggerOffset) */}
+        <h3 className={styles.serviceTitle}>{service.title}</h3>
+
+        {/* The body will be covered by next card */}
+        <div className={styles.cardBody}>
+          <p className={styles.serviceDesc}>{service.desc}</p>
+          <div className={styles.skillsList}>
+            {service.skills.map((skill) => (
+              <div key={skill.id} className={styles.skillRow}>
+                <span className={styles.skillNum}>{skill.id}</span>
+                <span className={styles.skillText}>{skill.text}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+));
+
+ServiceCard.displayName = 'ServiceCard';
+
+/* ── Main Section ───────────────────────────────────────────── */
 const WhatIDo = () => {
-  const sectionRef = useRef(null);
+  const cardRefs = useRef([]);
+  const containerRef = useRef(null);
 
-  /**
-   * As this section enters the viewport from the bottom,
-   * the card slides up (translateY: 100% → 0) and simultaneously
-   * we track scrollYProgress to dim the hero behind it.
-   */
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'start start'],
-  });
+  useEffect(() => {
+    const cards = cardRefs.current.filter(Boolean);
+    const triggers = [];
 
-  // Card translates from 60% down to 0 as scroll progresses
-  const cardY = useTransform(scrollYProgress, [0, 1], ['60%', '0%']);
+    cards.forEach((card, i) => {
+      // Pin each card at a staggered offset starting from the top of the viewport.
+      // i=0 pins at 0px, i=1 pins at 56px, etc.
+      const staggerOffset = i * TITLE_ROW_HEIGHT;
+
+      const st = ScrollTrigger.create({
+        trigger: card,
+        start: `top ${staggerOffset}`,
+        endTrigger: containerRef.current,
+        end: 'bottom bottom',
+        pin: true,
+        pinSpacing: false,
+      });
+      triggers.push(st);
+    });
+
+
+    return () => {
+      triggers.forEach((st) => st.kill());
+    };
+
+  }, []);
 
   return (
-    <section className={styles.wrapper} ref={sectionRef} id="Services">
-      <motion.div
-        className={styles.card}
-        style={{ translateY: cardY }}
-      >
+    <section className={styles.wrapper} ref={containerRef} id="Services">
+      <div className={styles.card}>
         <div className={styles.header}>
-          <h2 className={styles.sectionTitle}>What I Do /</h2>
+          <h2 className={styles.sectionTitle}>WHAT I DO /</h2>
         </div>
 
-        <div className={styles.list}>
-          {services.map((s) => (
-            <div key={s.num} className={styles.serviceRow}>
-              <span className={styles.num}>{s.num}</span>
-              <div className={styles.serviceContent}>
-                <h3 className={styles.serviceTitle}>{s.title}</h3>
-                <p className={styles.serviceDesc}>{s.desc}</p>
-                <div className={styles.tags}>
-                  {s.tags.map(t => <span key={t} className={styles.tag}>{t}</span>)}
-                </div>
-              </div>
-            </div>
+        <div className={styles.introRow}>
+          <span className={styles.introLabel}>(SERVICES)</span>
+          <p className={styles.introText}>
+            I focus on building fast, reliable, and user-friendly full-stack web applications, turning ideas into practical, scalable products with clean design and strong performance.
+          </p>
+        </div>
+
+        {/* Service cards — pinned via GSAP ScrollTrigger */}
+        <div className={styles.stickyContainer}>
+          {services.map((s, i) => (
+            <ServiceCard
+              key={s.num}
+              ref={(el) => (cardRefs.current[i] = el)}
+              service={s}
+              index={i}
+            />
           ))}
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 };

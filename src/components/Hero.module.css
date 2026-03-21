@@ -3,7 +3,7 @@
   width: 100vw;
   height: 100vh;
   background: var(--bg);
-  overflow: hidden;
+  /* overflow: hidden removed to allow background continuity, iframe has its own hidden wrapper */
 }
 
 /* ── Full-width name ─────────────────────────────── */
@@ -14,6 +14,12 @@
   width: 100%;
   padding: 0;
   z-index: 2;
+  pointer-events: none;
+
+  /* Mix-blend-mode effect applied to the whole wrapper */
+  mix-blend-mode: difference;
+  color: #fff;
+  will-change: transform;
 }
 
 .name {
@@ -26,9 +32,10 @@
    */
   font-size: clamp(3rem, 11.2vw, 14rem);
   font-weight: 700;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.04em;
   line-height: 0.96;
   text-transform: uppercase;
+  text-align: center;
   overflow: hidden;
 }
 
@@ -39,7 +46,7 @@
 .charClip {
   display: inline-block;
   overflow: hidden;
-  line-height: 1.05;
+  line-height: 2.05;
   vertical-align: top;
 }
 
@@ -57,32 +64,26 @@
 
 .spaceChar {
   display: inline-block;
-  width: 0.28em;
+  width: 0.5em;
+  /* Increased from 0.28em for a larger gap */
 }
 
-/* ── Image — BOTTOM CENTER ───────────────────────── */
+/* ── 3D Canvas — FULLSCREEN BACKGROUND ───────────────────────── */
 .imageWrap {
   position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: clamp(160px, 20vw, 310px);
-  height: clamp(200px, 44vh, 430px);
-  overflow: hidden;
-  border-radius: 4px 4px 0 0;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   z-index: 1;
-}
-
-.heroImg {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: grayscale(100%);
-  transition: transform 0.7s ease;
-}
-
-.imageWrap:hover .heroImg {
-  transform: scale(1.04);
+  /* Stay behind text */
+  pointer-events: auto;
+  /* Capture mouse movements */
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  background: var(--bg);
+  /* Prevents white flash from scroll bounce */
 }
 
 /* ── Bottom row ──────────────────────────────────── */
@@ -96,43 +97,63 @@
   justify-content: space-between;
   align-items: flex-end;
   z-index: 3;
+  /* Let mouse pass through the empty space so robot tracks it */
+  pointer-events: none;
 }
 
 .bottomLeft {
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
-  max-width: 265px;
+  max-width: 300px;
 }
 
 .arrow {
-  font-size: 1rem;
+  font-size: 4rem;
   opacity: 0.4;
 }
 
 .tagline {
-  font-size: clamp(0.76rem, 0.9vw, 0.9rem);
+  font-size: clamp(1.5rem, 1.9vw, 0.9rem);
   font-weight: 400;
   line-height: 1.6;
   opacity: 0.6;
 }
 
 .contactBtn {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  background: #0a0a0a;
-  color: #fff;
+  background: black;
+  color: white;
   font-family: var(--font);
-  font-size: 0.76rem;
+  font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.07em;
-  padding: 0.72rem 1.5rem;
+  padding: 14px 28px;
+  border: none;
   border-radius: 50px;
   width: fit-content;
-  transition: background 0.25s;
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
+  /* Re-enable clicking specifically on the button */
+  pointer-events: auto;
 }
 
-.contactBtn:hover { background: #333; }
+.contactBtn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(100%);
+  transition: transform 0.4s ease;
+  pointer-events: none;
+}
+
+.contactBtn:hover::before {
+  transform: translateY(0);
+}
 
 .bottomRight {
   display: flex;
@@ -142,7 +163,7 @@
 }
 
 .availLabel {
-  font-size: 0.6rem;
+  font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.16em;
   opacity: 0.4;

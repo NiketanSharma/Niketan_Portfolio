@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Lenis from 'lenis';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import Preloader from './components/Preloader';
 import Navbar from './components/Navbar';
@@ -9,22 +11,30 @@ import WhatIDo from './components/WhatIDo';
 import Works from './components/Works';
 import About from './components/About';
 import Contact from './components/Contact';
+import MenuOverlay from './components/MenuOverlay';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function App() {
   const [preloaderDone, setPreloaderDone] = useState(false);
 
-  // ── Lenis smooth scroll ─────────────────────────────
+  // ── Lenis smooth scroll + GSAP ScrollTrigger sync ────────
   useEffect(() => {
     const lenis = new Lenis({ duration: 1.15 });
-    let rafId;
-    const raf = (time) => {
-      lenis.raf(time);
-      rafId = requestAnimationFrame(raf);
-    };
-    rafId = requestAnimationFrame(raf);
+    // Expose Lenis globally so MenuOverlay can use it for smooth nav
+    window.__lenis = lenis;
+
+    // Sync Lenis scroll position with GSAP ScrollTrigger
+    lenis.on('scroll', ScrollTrigger.update);
+
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
+
     return () => {
-      cancelAnimationFrame(rafId);
       lenis.destroy();
+      window.__lenis = null;
     };
   }, []);
 
@@ -45,7 +55,10 @@ export default function App() {
       )}
 
       {/* Navbar — always in DOM, fades in after preloader */}
-      <Navbar visible={preloaderDone} />
+      <Navbar ready={preloaderDone} />
+
+      {/* Floating menu button + fullscreen overlay */}
+      <MenuOverlay />
 
       {/* Sticky hero that dims as WhatIDo card slides up over it */}
       <motion.div
@@ -60,18 +73,20 @@ export default function App() {
           borderRadius: heroBR,
           overflow: 'hidden',
           height: '100vh',
+          willChange: 'transform, opacity',
         }}
       >
         <Hero ready={preloaderDone} />
       </motion.div>
 
       {/* Sections scroll over the sticky hero */}
-      <div style={{ position: 'relative', zIndex: 10 }}>
+      <div style={{ position: 'relative', zIndex: 10, pointerEvents: 'none' }}>
         <WhatIDo />
         <Works />
         <About />
         <Contact />
       </div>
+
     </>
   );
 }

@@ -13,7 +13,7 @@ const projects = [
   { num: '05', tag: 'Development · 2025', category: 'Code-to-Image Tool', title: 'Code2Img', link: 'https://code2img-zuned.netlify.app/' },
 ];
 
-const ProjectCard = ({ project, index }) => {
+const ProjectCard = ({ project }) => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
   const imgY = useTransform(scrollYProgress, [0, 1], ['-8%', '8%']);
@@ -54,10 +54,10 @@ const ProjectCard = ({ project, index }) => {
 const Works = () => (
   <section className={styles.works} id="Works">
     <div className={styles.worksHeader}>
-      <span className={styles.label}>Selected Works /</span>
+      <span className={styles.label}>PROJECTS /</span>
     </div>
     <div className={styles.grid}>
-      {projects.map((p, i) => <ProjectCard key={p.num} project={p} index={i} />)}
+      {projects.map((p) => <ProjectCard key={p.num} project={p} />)}
     </div>
   </section>
 );
