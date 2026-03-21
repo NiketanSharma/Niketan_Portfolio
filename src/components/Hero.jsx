@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import styles from './Hero.module.css';
 import { smoothScrollTo } from './MenuOverlay';
@@ -21,8 +21,16 @@ const ContactBtn = () => (
   </a>
 );
 
-const Hero = ({ ready }) => (
+const Hero = ({ ready }) => {
+  const [showSpline, setShowSpline] = useState(false);
 
+  useEffect(() => {
+    // Start loading Spline 500ms after component mounts to avoid blocking initial render/preloader
+    const timer = setTimeout(() => setShowSpline(true), 500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
   <section className={styles.hero} id="Home">
 
     {/* ── Full-width name ── */}
@@ -56,20 +64,22 @@ const Hero = ({ ready }) => (
     >
       {/* Wrapper to crop out the bottom Spline watermark and capture full screen mouse movements */}
       <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden' }}>
-        <iframe
-          src="https://my.spline.design/nexbotrobotcharacterconcept-p6Ci2u51nhdo2SKld1GsSodb/"
-          frameBorder="0"
-          title="Spline 3D Robot"
-          style={{
-            pointerEvents: 'auto',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100vw',
-            height: 'calc(100vh + 80px)',
-            border: 'none'
-          }}
-        ></iframe>
+        {showSpline && (
+          <iframe
+            src="https://my.spline.design/nexbotrobotcharacterconcept-p6Ci2u51nhdo2SKld1GsSodb/"
+            frameBorder="0"
+            title="Spline 3D Robot"
+            style={{
+              pointerEvents: 'auto',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100vw',
+              height: 'calc(100vh + 80px)',
+              border: 'none',
+            }}
+          ></iframe>
+        )}
       </div>
     </motion.div>
 
@@ -101,6 +111,7 @@ const Hero = ({ ready }) => (
       </motion.div>
     </div>
   </section>
-);
+  );
+};
 
 export default Hero;
