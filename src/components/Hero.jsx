@@ -83,7 +83,7 @@ const Hero = ({ ready }) => (
       >
         <span className={styles.arrow}>↘</span>
         <p className={styles.tagline}>
-          I build fast, modern, and scalable web applications with clean design and strong performance, open to freelance opportunities worldwide.
+          I build fast, modern, and scalable web applications with clean design and strong performance, open to opportunities worldwide.
         </p>
         <ContactBtn />
       </motion.div>
