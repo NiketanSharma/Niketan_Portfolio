@@ -6,11 +6,11 @@ import styles from './Works.module.css';
 const DUMMY = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1600&auto=format&fit=crop';
 
 const projects = [
-  { num: '01', tag: 'Development · 2025', category: 'Modern Marketing Website', title: 'NURA', link: 'https://nurabyzuned.netlify.app/' },
-  { num: '02', tag: 'Development · 2025', category: 'Full-Stack Recruitment Platform', title: 'Job Portal', link: 'https://zunedjobs.netlify.app/' },
-  { num: '03', tag: 'Development · 2025', category: 'SAAS Platform', title: 'Productivity SAAS', link: 'https://productivity-saas-zuned.netlify.app/' },
-  { num: '04', tag: 'Development · 2025', category: 'ML Recommendation Engine', title: 'CineRec', link: 'https://movierecommendation-sbjn.onrender.com/' },
-  { num: '05', tag: 'Development · 2025', category: 'Code-to-Image Tool', title: 'Code2Img', link: 'https://code2img-zuned.netlify.app/' },
+  { num: '01', tag: 'Development · 2025', category: 'Modern Marketing Website', title: 'NURA', link: '' },
+  { num: '02', tag: 'Development · 2025', category: 'Full-Stack Recruitment Platform', title: 'Job Portal', link: '' },
+  { num: '03', tag: 'Development · 2025', category: 'SAAS Platform', title: 'Productivity SAAS', link: '' },
+  { num: '04', tag: 'Development · 2025', category: 'ML Recommendation Engine', title: 'CineRec', link: '' },
+  { num: '05', tag: 'Development · 2025', category: 'Code-to-Image Tool', title: 'Code2Img', link: '' },
 ];
 
 const ProjectCard = ({ project }) => {
