@@ -1,5 +1,7 @@
 import React, { useRef } from 'react';
+import { useInView } from 'framer-motion';
 import styles from './About.module.css';
+import AnimatedText from './AnimatedText';
 
 const skillGroups = [
   {
@@ -21,6 +23,7 @@ const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#
 const ScrambleText = ({ text, delay = 0 }) => {
   const ref = useRef(null);
   const frameRef = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   const scramble = (startDelay = 0) => {
     const timer = setTimeout(() => {
@@ -44,12 +47,14 @@ const ScrambleText = ({ text, delay = 0 }) => {
     return timer;
   };
 
-  // Run on mount with staggered delay
+  // Run when scrolled into view
   React.useEffect(() => {
-    const timer = scramble(delay);
-    return () => { clearTimeout(timer); clearInterval(frameRef.current); };
+    if (isInView) {
+      const timer = scramble(delay);
+      return () => { clearTimeout(timer); clearInterval(frameRef.current); };
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isInView]);
 
   return (
     <span ref={ref} className={styles.skillName}>
@@ -65,7 +70,7 @@ const About = () => (
       {/* ── Left: About content ─────────────────────── */}
       <div className={styles.leftCol}>
         <span className={styles.label}>(ABOUT)</span>
-        <h2 className={styles.heading}>HEY !</h2>
+        <h2 className={styles.heading}><AnimatedText text="HEY !" /></h2>
 
         <p className={styles.bio}>
           I'm Niketan Sharma, a full-stack developer and software engineer
@@ -100,7 +105,7 @@ const About = () => (
 
       {/* ── Right: Skills ───────────────────────────── */}
       <div className={styles.rightCol}>
-        <h3 className={styles.skillsHeading}>Skills</h3>
+        <h3 className={styles.skillsHeading}><AnimatedText text="Skills" /></h3>
         <div className={styles.skillsGrid}>
           {skillGroups.map((group) => (
             <div key={group.title} className={styles.skillGroup}>

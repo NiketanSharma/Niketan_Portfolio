@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import styles from './Works.module.css';
+import AnimatedText from './AnimatedText';
 
 // Single dummy image — user will replace later
 const DUMMY = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1600&auto=format&fit=crop';
@@ -54,7 +55,7 @@ const ProjectCard = ({ project }) => {
 const Works = () => (
   <section className={styles.works} id="Projects">
     <div className={styles.worksHeader}>
-      <span className={styles.label}>PROJECTS /</span>
+      <span className={styles.label}><AnimatedText text="PROJECTS /" /></span>
     </div>
     <div className={styles.grid}>
       {projects.map((p) => <ProjectCard key={p.num} project={p} />)}

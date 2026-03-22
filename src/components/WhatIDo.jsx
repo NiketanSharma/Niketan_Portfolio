@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './WhatIDo.module.css';
+import AnimatedText from './AnimatedText';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -107,7 +108,7 @@ const WhatIDo = () => {
     <section className={styles.wrapper} ref={containerRef} id="Services">
       <div className={styles.card}>
         <div className={styles.header}>
-          <h2 className={styles.sectionTitle}>WHAT I DO /</h2>
+          <h2 className={styles.sectionTitle}><AnimatedText text="WHAT I DO /" /></h2>
         </div>
 
         <div className={styles.introRow}>

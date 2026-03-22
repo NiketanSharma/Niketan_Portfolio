@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Contact.module.css';
 import { smoothScrollTo } from './MenuOverlay';
+import AnimatedText from './AnimatedText';
 
 const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -48,7 +49,7 @@ const Contact = () => {
     <footer className={styles.contact} id="Contact">
       <div className={styles.top}>
         <h2 className={styles.bigText}>
-          Let&apos;s<br />Make It<br />Happen
+          <AnimatedText text={["Let's", "Make It", "Happen"]} />
         </h2>
 
         <form className={styles.form} onSubmit={submit}>

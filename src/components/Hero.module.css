@@ -162,6 +162,11 @@
   gap: 0;
 }
 
+.bottomDataRow {
+  display: flex;
+  align-items: flex-end;
+}
+
 .availLabel {
   font-size: 1rem;
   font-weight: 700;
@@ -178,36 +183,54 @@
   line-height: 1;
 }
 
-/* ── Responsive ──────────────────────────────────── */
+/* ── Mobile Local Time ─────────────────────────────── */
+.mobileLocalTime {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .nameWrap {
     top: 6rem;
+    padding: 0 1rem;
+    box-sizing: border-box;
   }
 
   .name {
-    font-size: 9.5vw;
-    white-space: nowrap; 
+    font-size: 21vw;
+    white-space: normal; 
+    text-align: left;
+  }
+
+  .space {
+    display: block;
+    height: 0;
+    margin-bottom: -0.85em;
   }
 
   .spaceChar {
-    width: 0.2em;
+    display: none;
+  }
+
+  .imageWrap {
+    display: none;
   }
 
   .bottomRow {
-    flex-direction: column-reverse;
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: stretch;
     gap: 1.5rem;
     bottom: 2rem;
     padding: 0 1.5rem;
   }
 
-  .bottomRight {
-    align-items: flex-start;
-  }
-
   .bottomLeft {
     gap: 1rem;
     max-width: 100%;
+  }
+
+  .contactBtn {
+    font-size: 0.85rem;
+    padding: 10px 20px;
   }
 
   .tagline {
@@ -218,15 +241,40 @@
     font-size: 2.5rem;
   }
 
-  .tagline,
-  .availDate,
-  .availLabel,
-  .arrow {
-    color: #8c8c88; /* A light-medium gray that stands out softly on dark and light */
-    opacity: 1; 
-  }
-
   .arrow {
     display: inline-block;
+  }
+
+  .bottomDataRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+  }
+
+  .bottomRight {
+    white-space: nowrap;
+  }
+
+  .mobileLocalTime {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
+    white-space: nowrap;
+  }
+
+  .mobileLocalTime .availLabel {
+    margin-bottom: 0;
+    font-size: 0.7rem;
+  }
+
+  .timeValue {
+    font-size: 0.75rem;
+    font-weight: 500;
+    opacity: 0.7;
+    letter-spacing: 0.05em;
+    font-variant-numeric: tabular-nums;
   }
 }

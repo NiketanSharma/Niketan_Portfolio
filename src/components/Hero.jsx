@@ -23,15 +23,31 @@ const ContactBtn = () => (
 const Hero = ({ ready }) => {
   const [showSpline, setShowSpline] = useState(false);
   const [iframeLoaded, setIframeLoaded] = useState(false);
+  const [time, setTime] = useState(new Date());
 
   useEffect(() => {
     if (ready) {
       // Start fetching the Spline scene almost immediately after the preloader finishes.
       // Since network fetch takes time, the heavy WebGL parsing will naturally occur near the end of the text stagger.
-      const timer = setTimeout(() => setShowSpline(true), 100);
-      return () => clearTimeout(timer);
+      const splineTimer = setTimeout(() => setShowSpline(true), 100);
+      return () => clearTimeout(splineTimer);
     }
   }, [ready]);
+
+  useEffect(() => {
+    const timerId = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(timerId);
+  }, []);
+
+  const timeString = time.toLocaleTimeString('en-US', {
+    timeZone: 'Asia/Kolkata',
+    hour: 'numeric',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: true,
+  });
+  
+  const tzString = 'IST';
 
   return (
   <section className={styles.hero} id="Home">
@@ -102,17 +118,32 @@ const Hero = ({ ready }) => {
         <ContactBtn />
       </motion.div>
 
-      <motion.div
-        className={styles.bottomRight}
-        initial={{ opacity: 0, y: 16 }}
-        animate={ready ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8, delay: 0.75 }}
-      >
-        <span className={styles.availLabel}>AVAILABLE FOR WORK</span>
-        <span className={styles.availDate}>
-          {new Date().toLocaleString('default', { month: 'short' }).toUpperCase()}&apos;{new Date().getFullYear().toString().slice(-2)}
-        </span>
-      </motion.div>
+      <div className={styles.bottomDataRow}>
+        {/* Mobile-only local time */}
+        <motion.div
+          className={styles.mobileLocalTime}
+          initial={{ opacity: 0, y: 16 }}
+          animate={ready ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.85 }}
+        >
+          <span className={styles.availLabel}>LOCAL TIME</span>
+          <span className={styles.timeValue}>
+            {timeString}{tzString ? `, ${tzString}` : ''}
+          </span>
+        </motion.div>
+
+        <motion.div
+          className={styles.bottomRight}
+          initial={{ opacity: 0, y: 16 }}
+          animate={ready ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.75 }}
+        >
+          <span className={styles.availLabel}>AVAILABLE FOR WORK</span>
+          <span className={styles.availDate}>
+            {new Date().toLocaleString('default', { month: 'short' }).toUpperCase()}&apos;{new Date().getFullYear().toString().slice(-2)}
+          </span>
+        </motion.div>
+      </div>
     </div>
   </section>
   );
