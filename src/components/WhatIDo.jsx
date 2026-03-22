@@ -81,29 +81,26 @@ const WhatIDo = () => {
 
   useEffect(() => {
     const cards = cardRefs.current.filter(Boolean);
-    const triggers = [];
+    let mm = gsap.matchMedia();
 
-    cards.forEach((card, i) => {
-      // Pin each card at a staggered offset starting from the top of the viewport.
-      // i=0 pins at 0px, i=1 pins at 56px, etc.
-      const staggerOffset = i * TITLE_ROW_HEIGHT;
+    mm.add("(min-width: 769px)", () => {
+      cards.forEach((card, i) => {
+        const staggerOffset = i * TITLE_ROW_HEIGHT;
 
-      const st = ScrollTrigger.create({
-        trigger: card,
-        start: `top ${staggerOffset}`,
-        endTrigger: containerRef.current,
-        end: 'bottom bottom',
-        pin: true,
-        pinSpacing: false,
+        ScrollTrigger.create({
+          trigger: card,
+          start: `top ${staggerOffset}`,
+          endTrigger: containerRef.current,
+          end: 'bottom bottom',
+          pin: true,
+          pinSpacing: false,
+        });
       });
-      triggers.push(st);
     });
 
-
     return () => {
-      triggers.forEach((st) => st.kill());
+      mm.revert();
     };
-
   }, []);
 
   return (

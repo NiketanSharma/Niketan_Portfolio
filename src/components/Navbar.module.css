@@ -65,3 +65,17 @@
 .cubeTop {
   display: none;
 }
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem 1.5rem;
+  }
+  .brand {
+    font-size: 1.1rem;
+    white-space: normal;
+    max-width: 60%;
+  }
+  .nav {
+    display: none; /* Hide regular nav links to rely on the hamburger menu if it exists, or just fit the brand */
+  }
+}

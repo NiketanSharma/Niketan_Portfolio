@@ -7,7 +7,6 @@ const name1 = 'NIKETAN';
 const name2 = 'SHARMA';
 const chars = [...name1.split(''), ' ', ...name2.split('')];
 
-
 const ContactBtn = () => (
   <a
     href="#Contact"

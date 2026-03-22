@@ -18,6 +18,13 @@ html {
   background-color: var(--bg);
   color: var(--text);
   overflow-x: hidden;
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 14px; /* Reduces all rem-based font sizes by ~12.5% */
+  }
 }
 
 /* Lenis */

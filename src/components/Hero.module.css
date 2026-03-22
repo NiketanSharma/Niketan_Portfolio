@@ -177,3 +177,56 @@
   letter-spacing: -0.04em;
   line-height: 1;
 }
+
+/* ── Responsive ──────────────────────────────────── */
+@media (max-width: 768px) {
+  .nameWrap {
+    top: 6rem;
+  }
+
+  .name {
+    font-size: 9.5vw;
+    white-space: nowrap; 
+  }
+
+  .spaceChar {
+    width: 0.2em;
+  }
+
+  .bottomRow {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 1.5rem;
+    bottom: 2rem;
+    padding: 0 1.5rem;
+  }
+
+  .bottomRight {
+    align-items: flex-start;
+  }
+
+  .bottomLeft {
+    gap: 1rem;
+    max-width: 100%;
+  }
+
+  .tagline {
+    font-size: 0.95rem;
+  }
+
+  .availDate {
+    font-size: 2.5rem;
+  }
+
+  .tagline,
+  .availDate,
+  .availLabel,
+  .arrow {
+    color: #8c8c88; /* A light-medium gray that stands out softly on dark and light */
+    opacity: 1; 
+  }
+
+  .arrow {
+    display: inline-block;
+  }
+}
