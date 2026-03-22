@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React, { useRef, useEffect } from 'react';
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import styles from './Works.module.css';
 import AnimatedText from './AnimatedText';
 
@@ -7,12 +7,75 @@ import AnimatedText from './AnimatedText';
 const DUMMY = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1600&auto=format&fit=crop';
 
 const projects = [
-  { num: '01', tag: 'Development · 2025', category: 'Modern Marketing Website', title: 'NURA', link: '' },
-  { num: '02', tag: 'Development · 2025', category: 'Full-Stack Recruitment Platform', title: 'Job Portal', link: '' },
-  { num: '03', tag: 'Development · 2025', category: 'SAAS Platform', title: 'Productivity SAAS', link: '' },
-  { num: '04', tag: 'Development · 2025', category: 'ML Recommendation Engine', title: 'CineRec', link: '' },
-  { num: '05', tag: 'Development · 2025', category: 'Code-to-Image Tool', title: 'Code2Img', link: '' },
+  {
+    num: '01',
+    tag: 'Development · 2026',
+    category: 'Marketing Website',
+    title: 'BigBite - Restaurant Website',
+    link: 'https://www.bigbitefoods.shop/',
+    video: 'assets/BigBite.mp4'
+  },
+  {
+    num: '02',
+    tag: 'Development · 2026',
+    category: 'Code To Image Tool',
+    title: 'SnapCode',
+    link: 'https://snapcode18.vercel.app/',
+    video: 'assets/SnapCode.mp4'
+  },
+  {
+    num: '03',
+    tag: 'Development · 2025',
+    category: 'Tax Calculator with ChatBot',
+    title: 'TaxEase',
+    link: 'https://niketansharma.github.io/TaxEase/',
+    video: 'assets/TaxEase.mp4'
+  },
+  {
+    num: '04',
+    tag: 'Development · 2025',
+    category: 'Task Management',
+    title: 'TaskMate',
+    link: 'https://taskmate-frontend-ns0h.onrender.com/',
+    video: 'assets/TaskMate.mp4'
+  },
+  {
+    num: '05',
+    tag: 'Development · 2025',
+    category: 'Code-to-Image Tool',
+    title: 'Code2Img',
+    link: '',
+    video: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4'
+  },
 ];
+
+const ProjectVideo = ({ src, y }) => {
+  const videoRef = useRef(null);
+  const isInView = useInView(videoRef, { amount: 0.3 });
+
+  React.useEffect(() => {
+    if (videoRef.current) {
+      if (isInView) {
+        videoRef.current.play().catch(e => console.log("Video play failed:", e));
+      } else {
+        videoRef.current.pause();
+      }
+    }
+  }, [isInView]);
+
+  return (
+    <motion.video
+      ref={videoRef}
+      style={{ y }}
+      src={src}
+      className={styles.projectVideo}
+      loop
+      muted
+      playsInline
+      tabIndex="-1"
+    />
+  );
+};
 
 const ProjectCard = ({ project }) => {
   const ref = useRef(null);
@@ -36,11 +99,9 @@ const ProjectCard = ({ project }) => {
       </div>
 
       <div className={styles.imageWrap}>
-        <motion.img
-          style={{ y: imgY }}
-          src={DUMMY}
-          alt={`${project.title} placeholder`}
-          className={styles.projectImg}
+        <ProjectVideo
+          src={project.video}
+          y={imgY}
         />
         <div className={styles.imageOverlay}>
           <span className={styles.viewBtn}>View Project ↗</span>

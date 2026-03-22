@@ -79,7 +79,8 @@
   margin-bottom: 1.5rem;
 }
 
-.projectImg {
+.projectImg,
+.projectVideo {
   width: 100%;
   height: 115%;
   /* extra height for parallax */
