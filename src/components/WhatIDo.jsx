@@ -94,7 +94,7 @@ const WhatIDo = () => {
           endTrigger: containerRef.current,
           end: 'bottom bottom',
           pin: true,
-          pinSpacing: false,
+          pinSpacing: i === cards.length - 1,
         });
       });
     });
