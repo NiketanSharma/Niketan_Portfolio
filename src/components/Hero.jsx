@@ -27,10 +27,13 @@ const Hero = ({ ready }) => {
 
   useEffect(() => {
     if (ready) {
-      // Start fetching the Spline scene almost immediately after the preloader finishes.
-      // Since network fetch takes time, the heavy WebGL parsing will naturally occur near the end of the text stagger.
-      const splineTimer = setTimeout(() => setShowSpline(true), 100);
-      return () => clearTimeout(splineTimer);
+      // Defer Spline loading until AFTER the text animations finish (approx 1.8s).
+      // WebGL parsing blocks the main thread and causes UI stagger.
+      // Also, completely skip loading it on mobile since it's hidden via CSS anyway.
+      if (window.innerWidth > 768) {
+        const splineTimer = setTimeout(() => setShowSpline(true), 1800);
+        return () => clearTimeout(splineTimer);
+      }
     }
   }, [ready]);
 
