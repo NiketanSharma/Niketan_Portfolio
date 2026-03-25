@@ -7,6 +7,7 @@ const navItems = [
   { label: 'SERVICES', id: 'Services' },
   { label: 'PROJECTS', id: 'Projects' },
   { label: 'ABOUT', id: 'About' },
+  { label: 'CERTIFICATES', id: 'Certifications' },
   { label: 'CONTACT', id: 'Contact' },
 ];
 
@@ -76,6 +77,19 @@ export default function MenuOverlay() {
       setVisible(v > window.innerHeight * 0.8);
     });
   }, [scrollY]);
+
+  const toggle = () => setOpen(!open);
+
+  // Smooth scroll helper
+  const scrollTo = (id) => {
+    setOpen(false);
+    if (window.__lenis) {
+      window.__lenis.scrollTo(id, { offset: -50, duration: 1.5 });
+    } else {
+      const el = document.querySelector(id);
+      el?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';

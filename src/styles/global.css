@@ -1,4 +1,6 @@
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -23,14 +25,24 @@ html {
 
 @media (max-width: 768px) {
   html {
-    font-size: 14px; /* Reduces all rem-based font sizes by ~12.5% */
+    font-size: 14px;
+    /* Reduces all rem-based font sizes by ~12.5% */
   }
 }
 
 /* Lenis */
-html.lenis, html.lenis body { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
-.lenis.lenis-stopped { overflow: hidden; }
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
 
 body {
   background-color: var(--bg);
@@ -42,9 +54,76 @@ a {
   color: inherit;
 }
 
-img { display: block; }
+img {
+  display: block;
+}
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font);
   font-weight: 800;
+}
+
+/* Global Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+/* For sections with black background */
+[style*="background: var(--black)"]::-webkit-scrollbar-track,
+.black-bg::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+[style*="background: var(--black)"]::-webkit-scrollbar-thumb,
+.black-bg::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+[style*="background: var(--black)"]::-webkit-scrollbar-thumb:hover,
+.black-bg::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* Vertical Scroll Sidebar Indicator */
+.global-scroll-sidebar {
+  position: fixed;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 150px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  z-index: 3000;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.global-scroll-sidebar-thumb {
+  width: 100%;
+  background: #fff;
+  border-radius: 20px;
 }

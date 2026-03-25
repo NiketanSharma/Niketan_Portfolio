@@ -3,7 +3,7 @@ import { motion, useScroll, useMotionValue, useTransform, animate } from 'framer
 import styles from './Navbar.module.css';
 import { smoothScrollTo } from './MenuOverlay';
 
-const links = ['Services', 'Projects', 'About', 'Contact'];
+const links = ['Services', 'Projects', 'About', 'Certifications', 'Contact'];
 
 const NavLink = ({ label }) => (
   <button

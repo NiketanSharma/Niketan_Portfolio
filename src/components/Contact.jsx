@@ -73,7 +73,7 @@ const Contact = () => {
       <div className={styles.bottom}>
         <div className={styles.footerCol}>
           <span className={styles.colLabel}>MENU</span>
-          {['Home', 'Services', 'Projects', 'About', 'Contact'].map(l => (
+          {['Home', 'Services', 'Projects', 'About', 'Certifications', 'Contact'].map(l => (
             <a
               key={l}
               href={`#${l}`}

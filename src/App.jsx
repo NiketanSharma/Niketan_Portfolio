@@ -11,6 +11,7 @@ import WhatIDo from './components/WhatIDo';
 import Works from './components/Works';
 import About from './components/About';
 import Contact from './components/Contact';
+import Certifications from './components/Certifications';
 import MenuOverlay from './components/MenuOverlay';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -40,15 +41,23 @@ export default function App() {
 
   // ── Hero scale + fade on scroll ─────────────────────
   const heroRef = useRef(null);
-  const { scrollY } = useScroll();
-  const heroScale   = useTransform(scrollY, [0, 500], [1, 0.88]);
+  const { scrollY, scrollYProgress } = useScroll();
+  const heroScale = useTransform(scrollY, [0, 500], [1, 0.88]);
   const heroOpacity = useTransform(scrollY, [0, 450], [1, 0]);
-  const heroBR      = useTransform(scrollY, [0, 300], ['0px', '24px']);
+  const heroBR = useTransform(scrollY, [0, 300], ['0px', '24px']);
 
   const handlePreloaderDone = () => setPreloaderDone(true);
 
   return (
     <>
+      {/* Global Scroll Sidebar Indicator */}
+      <div className="global-scroll-sidebar">
+        <motion.div 
+          className="global-scroll-sidebar-thumb"
+          style={{ height: useTransform(scrollYProgress, [0, 1], ['0%', '100%']) }}
+        />
+      </div>
+
       {/* Preloader overlay — rendered above everything */}
       {!preloaderDone && (
         <Preloader onComplete={handlePreloaderDone} />
@@ -80,10 +89,11 @@ export default function App() {
       </motion.div>
 
       {/* Sections scroll over the sticky hero */}
-      <div style={{ position: 'relative', zIndex: 10, pointerEvents: 'none' }}>
+      <div style={{ position: 'relative', zIndex: 10 }}>
         <WhatIDo />
         <Works />
         <About />
+        <Certifications />
         <Contact />
       </div>
 
