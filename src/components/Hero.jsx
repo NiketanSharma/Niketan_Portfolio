@@ -9,14 +9,11 @@ const chars = [...name1.split(''), ' ', ...name2.split('')];
 
 const ContactBtn = () => (
   <a
-    href="#Contact"
-    onClick={(e) => {
-      e.preventDefault();
-      smoothScrollTo('Contact');
-    }}
+    href="/assets/Niketan_Sharma_CV.pdf"
+    download="Niketan_Sharma_CV.pdf"
     className={styles.contactBtn}
   >
-    CONTACT ↗
+    DOWNLOAD CV ↓
   </a>
 );
 
