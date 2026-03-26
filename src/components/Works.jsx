@@ -42,10 +42,10 @@ const projects = [
   {
     num: '05',
     tag: 'Development · 2025',
-    category: 'Code-to-Image Tool',
-    title: 'Code2Img',
-    link: '',
-    video: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4'
+    category: 'Code Convertor and Summarizer',
+    title: 'SyntaxSwap',
+    link: 'https://syntax-swap.vercel.app/',
+    video: 'assets/SyntaxSwap.mp4'
   },
 ];
 
