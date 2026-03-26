@@ -133,22 +133,3 @@ npm run preview   # preview the production build locally
 | **SyntaxSwap** | AI code converter & summarizer | [Live ↗](https://syntax-swap.vercel.app/) |
 
 ---
-
-## 📬 Contact
-
-- **Email** — niketansharma18@gmail.com
-- **LinkedIn** — [niketansharma05](https://www.linkedin.com/in/niketansharma05/)
-- **GitHub** — [NiketanSharma](https://github.com/NiketanSharma)
-- **Instagram** — [niketan.__](https://www.instagram.com/niketan.__/)
-
----
-
-## 📄 License
-
-This project is open-source and available under the [MIT License](LICENSE).
-
----
-
-<p align="center">
-  Designed & Built by <strong>Niketan Sharma</strong> with ❤️
-</p>
