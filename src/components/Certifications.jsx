@@ -41,6 +41,12 @@ const certifications = [
     image: '/assets/infosys1.png',
   },
   {
+    title: 'Dynamic Programming Camp',
+    organization: 'AlgoUniversity',
+    date: 'APR 2026',
+    image: '/assets/AlgoUniversity.png',
+  },
+  {
     title: 'ChatGPT-4 Prompt Engineering: ChatGPT, Generative AI & LLM',
     organization: 'Infosys Springboard',
     date: 'SEP 2025',
